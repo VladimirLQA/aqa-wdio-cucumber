@@ -28,7 +28,10 @@ export class ProductsApiClient {
       baseURL: apiConfig.baseUrl,
       url: apiConfig.endpoints["Get Product By Id"](id),
       method: "get",
-      headers: { "Content-Type": "application/json", Authorization: token },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
     };
     return this.apiClient.send<IProductResponse>(options);
   }
