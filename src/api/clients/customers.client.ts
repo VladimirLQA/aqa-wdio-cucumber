@@ -1,8 +1,8 @@
-import { apiConfig } from "../../config/apiConfig";
-import { IRequestOptions } from "../../data/types/api.types";
-import { ICustomer, ICustomerResponse } from "../../data/types/customer.types";
+import { apiConfig } from "../../config/apiConfig.js";
+import { IRequestOptions } from "../../data/types/api.types.js";
+import { ICustomer, ICustomerResponse } from "../../data/types/customer.types.js";
 import { AxiosApiClient } from "../../utils/apiClients/axios";
-import { logStep } from "../../utils/report/decorator";
+import { logStep } from "../../utils/report/decorator.js";
 
 export class CustomersApiClient {
     constructor(private apiClient = new AxiosApiClient()) {}
