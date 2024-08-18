@@ -2,4 +2,6 @@ allure-results
 allure-report
 .gitignore
 package-lock.json
-node-modules
+node_modules
+.env
+.idea/
