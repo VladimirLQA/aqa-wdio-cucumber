@@ -1,0 +1,5 @@
+allure-results
+allure-report
+.gitignore
+package-lock.json
+node-modules
