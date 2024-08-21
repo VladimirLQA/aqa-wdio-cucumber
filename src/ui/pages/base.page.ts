@@ -38,4 +38,12 @@ export abstract class BasePage {
   async deleteCookies(cookieNames: string[]) {
     await browser.deleteCookies(cookieNames);
   }
+
+  async getCookies(cookieNames: string[]) {
+    const cookies = await browser.getCookies(cookieNames);
+    const values = cookies
+      .filter((c) => cookieNames.includes(c.name))
+      .map((c) => c.value);
+    return values;
+  }
 }

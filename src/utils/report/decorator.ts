@@ -5,7 +5,10 @@ export function logStep(stepName: string): MethodDecorator {
   return function (_target: unknown, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor?.value;
     descriptor.value = async function (...args: unknown[]) {
-      allure.startStep(stepName);
+      const value = args[0]; // Extract the value from the arguments
+      const newStepName = stepName.replace('{amount}', `"${value}"`);
+
+      allure.startStep(newStepName);
       try {
         const result = await originalMethod.apply(this, args);
         allure.endStep();
@@ -25,7 +28,9 @@ export function logAction(stepName: string): MethodDecorator {
     descriptor.value = async function (...args: unknown[]) {
       const selector = args[0]; // Extract the selector from the arguments
       const value = args[1]; // Extract the value from the arguments
-      const newStepName = stepName.replace('{selector}', `"${selector}"`).replace('{text}', `"${value}"`);
+      const newStepName = stepName.replace('{selector}', `"${selector}"`)
+        .replace('{text}', `"${value}"`)
+        .replace('{amount}', `"${value}"`);
       allure.startStep(newStepName);
       try {
         const result = await originalMethod.apply(this, args);

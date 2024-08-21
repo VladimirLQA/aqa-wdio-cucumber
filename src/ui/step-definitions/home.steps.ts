@@ -5,4 +5,5 @@ const homeService = new HomeService();
 
 When(/^I open (Products|Customers|Orders) List page on "Home" page$/, async function (module: string) {
   if (module === "Products") await homeService.openProductsPage();
+  if (module === "Customers") await homeService.openCustomersPage();
 });

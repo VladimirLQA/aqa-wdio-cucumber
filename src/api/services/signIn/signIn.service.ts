@@ -1,11 +1,11 @@
 import { SignInApiClient } from "../../clients/signIn.client.js";
-import { ADMIN_USERNAME, ADMIN_PASSWORD } from "../../../config/environment.js";
+import { ADMIN_USERNAME, ADMIN_PASSWORD, Users } from "../../../config/environment.js";
 import { logStep } from "../../../utils/report/decorator.js";
 
 class SignInApiService {
   private token: string | null = null;
 
-  constructor(private signInClient = new SignInApiClient()) {}
+  constructor(private signInClient = new SignInApiClient()) { }
 
   @logStep("Sign in as Admin via API")
   async signInAsAdminApi() {

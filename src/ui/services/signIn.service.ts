@@ -1,11 +1,12 @@
 import { ADMIN_PASSWORD, ADMIN_USERNAME } from "../../config/environment.js";
 import type { IUserCredentials } from "../../data/types/user.types.js";
 import { logStep } from "../../utils/report/decorator.js";
+import { Users } from "../../config/environment.js";
 import { HomePage } from "../pages/home.page.js";
 import { SignInPage } from "../pages/signIn.page.js";
 
 export class SignInService {
-  constructor(private signInPage = new SignInPage(), private homePage = new HomePage()) {}
+  constructor(private signInPage = new SignInPage(), private homePage = new HomePage()) { }
 
   @logStep("Open sales portal")
   async openSalesPortal() {
