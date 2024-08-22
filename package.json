@@ -2,6 +2,7 @@
   "name": "aqa-wdio-cucumber-2",
   "type": "module",
   "devDependencies": {
+    "@types/lodash": "^4.17.7",
     "@wdio/allure-reporter": "^8.39.0",
     "@wdio/cli": "^8.40.2",
     "@wdio/cucumber-framework": "^8.40.2",
@@ -11,13 +12,16 @@
     "typescript": "^5.5.4"
   },
   "scripts": {
-    "test": "wdio run ./wdio.conf.ts",
+    "test": "npm run report-clear && wdio run ./wdio.conf.ts",
     "report": "allure generate allure-results -o allure-report --clean",
-    "report-open": "npm run report && allure open allure-report"
+    "report-open": "npm run report && allure open allure-report",
+    "report-clear": "rm -rf allure-results/* && rm -rf allure-report/*"
   },
   "dependencies": {
     "@faker-js/faker": "^8.4.1",
     "allure-commandline": "^2.30.0",
-    "axios": "^1.7.4"
+    "axios": "^1.7.4",
+    "lodash": "^4.17.21",
+    "prettier": "^3.3.3"
   }
 }
