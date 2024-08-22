@@ -1,8 +1,7 @@
-import { BasePage } from "./base.page.js";
+import { BasePage } from './base.page.js';
 
 export abstract class SalesPortalPage extends BasePage {
-  protected readonly spinner = ".spinner-border";
-  readonly "Notification label" = ".toast-body";
+  protected readonly spinner = '.spinner-border';
   abstract readonly uniqueElement: string;
 
   async waitForOpened() {

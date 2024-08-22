@@ -17,7 +17,7 @@ export function validateResponse<T extends object>(
   response: IResponse<T>,
   status: number,
   IsSuccess: boolean,
-  ErrorMessage: null | string
+  ErrorMessage: null | string,
 ) {
   expect(response.status).to.equal(status);
   if (isResponseWithIsSuccessAndErrorMessage(response)) {
@@ -26,6 +26,8 @@ export function validateResponse<T extends object>(
   }
 }
 
-function isResponseWithIsSuccessAndErrorMessage(response: IResponse<object>): response is IResponse<IResponseFields> {
+function isResponseWithIsSuccessAndErrorMessage(
+  response: IResponse<object>,
+): response is IResponse<IResponseFields> {
   return 'IsSuccess' in response && 'ErrorMessage' in response;
 }

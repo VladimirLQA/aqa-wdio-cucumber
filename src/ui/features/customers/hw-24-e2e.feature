@@ -29,3 +29,5 @@ Feature: [UI] [Customers]
     Scenario: Should verify created customers in details modal
         And I open Customers List page on "Home" page
         Then I should be on "Customers List" page
+        Then I should see created Customers in table on "Customers List" page
+# When I open Details modal on "Customers List" page for "1" created customer

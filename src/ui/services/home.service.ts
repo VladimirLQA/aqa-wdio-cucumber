@@ -7,8 +7,8 @@ export class HomeService {
   constructor(
     private homePage = new HomePage(),
     private productsPage = new ProductsPage(),
-    private customersPage = new CustomersListPage()
-  ) { }
+    private customersPage = new CustomersListPage(),
+  ) {}
 
   @logStep('Open products page')
   async openProductsPage() {

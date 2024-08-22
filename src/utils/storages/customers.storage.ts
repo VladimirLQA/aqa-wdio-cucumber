@@ -1,5 +1,4 @@
-
-import type { ICustomerFromResponse } from "../../data/types/customer.types.js";
+import type { ICustomerFromResponse } from '../../data/types/customer.types.js';
 
 export class CustomerStorage {
   private static instance: CustomerStorage;
@@ -21,7 +20,7 @@ export class CustomerStorage {
     // }
   }
 
-  update(customer: Pick<ICustomerFromResponse, "_id"> & Partial<ICustomerFromResponse>) {
+  update(customer: Pick<ICustomerFromResponse, '_id'> & Partial<ICustomerFromResponse>) {
     const index = this.findCustomerById(customer._id);
     this.customers[index] = { ...this.customers[index], ...customer };
   }
@@ -31,10 +30,10 @@ export class CustomerStorage {
   }
 
   get(_id?: string) {
-    if (!this.customers.length) throw new Error("No stored customers");
+    if (!this.customers.length) throw new Error('No stored customers');
     if (!_id) return this.customers[this.customers.length - 1];
     const index = this.findCustomerById(_id);
-    if (!index) throw new Error("No such customer");
+    if (!index) throw new Error('No such customer');
     return this.customers[index];
   }
 

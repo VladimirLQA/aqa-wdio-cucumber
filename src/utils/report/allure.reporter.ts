@@ -19,20 +19,34 @@ export class AllureReporter {
   }
 
   private logRequest(): void {
-    allure.startStep(`Request: ${this.requestOptions?.method?.toUpperCase()} ${this.requestOptions?.url}`);
-    allure.addAttachment('Request Headers', JSON.stringify(this.requestOptions?.headers, null, 2), 'application/json');
+    allure.startStep(
+      `Request: ${this.requestOptions?.method?.toUpperCase()} ${this.requestOptions?.url}`,
+    );
+    allure.addAttachment(
+      'Request Headers',
+      JSON.stringify(this.requestOptions?.headers, null, 2),
+      'application/json',
+    );
     allure.addAttachment(
       'Request Body',
       this.requestOptions?.data ? JSON.stringify(this.requestOptions?.data, null, 2) : {},
-      'application/json'
+      'application/json',
     );
     allure.endStep();
   }
 
   private logResponse() {
     allure.startStep(`Response: ${this.response?.status} ${this.requestOptions?.url}`);
-    allure.addAttachment('Response Headers', JSON.stringify(this.response?.headers, null, 2), 'application/json');
-    allure.addAttachment('Response Body', JSON.stringify(this.response?.body, null, 2), 'application/json');
+    allure.addAttachment(
+      'Response Headers',
+      JSON.stringify(this.response?.headers, null, 2),
+      'application/json',
+    );
+    allure.addAttachment(
+      'Response Body',
+      JSON.stringify(this.response?.body, null, 2),
+      'application/json',
+    );
     allure.endStep(this.response && this.response.status >= 400 ? Status.FAILED : Status.PASSED);
   }
 }

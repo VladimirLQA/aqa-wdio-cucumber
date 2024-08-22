@@ -1,5 +1,5 @@
-import { Then } from "@wdio/cucumber-framework";
-import { SignInPage } from "../pages/signIn.page.js";
+import { Then } from '@wdio/cucumber-framework';
+import { SignInPage } from '../pages/signIn.page.js';
 
 const signInPage = new SignInPage();
 

@@ -29,5 +29,5 @@ export enum MANUFACTURERS {
   SONY = 'Sony',
   XIAOMI = 'Xiaomi',
   AMAZON = 'Amazon',
-  TESLA = 'Tesla'
+  TESLA = 'Tesla',
 }

@@ -26,7 +26,7 @@ export class AxiosApiClient {
     return {
       status: this.response!.status,
       body: this.response && this.response.data ? this.response.data : null,
-      headers: this.response!.headers
+      headers: this.response!.headers,
     };
   }
 }

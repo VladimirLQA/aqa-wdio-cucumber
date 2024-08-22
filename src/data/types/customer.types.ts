@@ -34,5 +34,5 @@ export const COUNTRY = {
   GERMANY: 'Germany',
   FRANCE: 'France',
   GREATE_BRITAIN: 'Great Britain',
-  RUSSIA: 'Russia'
-}
+  RUSSIA: 'Russia',
+};

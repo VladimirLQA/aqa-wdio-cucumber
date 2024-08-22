@@ -9,26 +9,24 @@ export class UserStorage {
 
   constructor() {
     if (UserStorage.instance) {
-      return UserStorage.instance
+      return UserStorage.instance;
     }
     UserStorage.instance = this;
   }
 
   setToken(token: string, email?: string) {
     email
-      ? this.findUserByUsername(email).token = token
-      : this.users[this.users.length - 1].token = token;
+      ? (this.findUserByUsername(email).token = token)
+      : (this.users[this.users.length - 1].token = token);
   }
 
   getToken(email?: string): string {
-    return email
-      ? this.findUserByUsername(email)?.token
-      : this.users[this.users.length - 1]?.token;
+    return email ? this.findUserByUsername(email)?.token : this.users[this.users.length - 1]?.token;
   }
 
   setUser(email: string, token: string) {
     this.users.push({ email, token: this.convertToBearerToken(token) });
-    console.log('users', this.users)
+    console.log('users', this.users);
   }
 
   // getClientForUser(email?: string) {
@@ -37,8 +35,8 @@ export class UserStorage {
 
   removeToken(email?: string) {
     email
-      ? this.findUserByUsername(email).token = ""
-      : this.users[this.users.length - 1].token = "";
+      ? (this.findUserByUsername(email).token = '')
+      : (this.users[this.users.length - 1].token = '');
   }
 
   private findUserByUsername(email: string) {

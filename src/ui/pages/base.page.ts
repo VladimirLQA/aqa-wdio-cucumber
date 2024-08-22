@@ -5,10 +5,20 @@ export abstract class BasePage {
     return await $(locator);
   }
 
+  private async findElementArray(locator: string) {
+    return await $$(locator);
+  }
+
   public async waitForElement(locator: string, timeout = TIMEOUT_5_SECS, reverse = false) {
     const element = await this.findElement(locator);
     await element.waitForDisplayed({ timeout, reverse });
     return element;
+  }
+
+  public async waitForElementArray(locator: string, timeout = TIMEOUT_5_SECS, reverse = false) {
+    const elements = await this.findElementArray(locator);
+    // await element.waitForDisplayed({ timeout, reverse });
+    return elements;
   }
 
   public async click(locator: string, timeout = TIMEOUT_5_SECS) {
@@ -26,7 +36,11 @@ export abstract class BasePage {
     return await element.getText();
   }
 
-  async selectDropdownValue(dropdownLocator: string, value: string | number, timeout = TIMEOUT_5_SECS) {
+  async selectDropdownValue(
+    dropdownLocator: string,
+    value: string | number,
+    timeout = TIMEOUT_5_SECS,
+  ) {
     const element = await this.waitForElement(dropdownLocator, timeout);
     await element.selectByVisibleText(value);
   }
@@ -41,9 +55,7 @@ export abstract class BasePage {
 
   async getCookies(cookieNames: string[]) {
     const cookies = await browser.getCookies(cookieNames);
-    const values = cookies
-      .filter((c) => cookieNames.includes(c.name))
-      .map((c) => c.value);
+    const values = cookies.filter((c) => cookieNames.includes(c.name)).map((c) => c.value);
     return values;
   }
 }

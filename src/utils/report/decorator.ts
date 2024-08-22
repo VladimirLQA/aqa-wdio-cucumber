@@ -2,7 +2,11 @@ import allure from '@wdio/allure-reporter';
 import { Status } from 'allure-js-commons';
 
 export function logStep(stepName: string): MethodDecorator {
-  return function (_target: unknown, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
+  return function (
+    _target: unknown,
+    _propertyKey: string | symbol,
+    descriptor: PropertyDescriptor,
+  ) {
     const originalMethod = descriptor?.value;
     descriptor.value = async function (...args: unknown[]) {
       const value = args[0]; // Extract the value from the arguments
@@ -23,12 +27,17 @@ export function logStep(stepName: string): MethodDecorator {
 }
 
 export function logAction(stepName: string): MethodDecorator {
-  return function (_target: unknown, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
+  return function (
+    _target: unknown,
+    _propertyKey: string | symbol,
+    descriptor: PropertyDescriptor,
+  ) {
     const originalMethod = descriptor.value;
     descriptor.value = async function (...args: unknown[]) {
       const selector = args[0]; // Extract the selector from the arguments
       const value = args[1]; // Extract the value from the arguments
-      const newStepName = stepName.replace('{selector}', `"${selector}"`)
+      const newStepName = stepName
+        .replace('{selector}', `"${selector}"`)
         .replace('{text}', `"${value}"`)
         .replace('{amount}', `"${value}"`);
       allure.startStep(newStepName);

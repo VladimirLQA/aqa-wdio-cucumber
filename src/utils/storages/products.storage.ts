@@ -1,4 +1,4 @@
-import type { IProductFromResponse } from "../../data/types/product.types.js";
+import type { IProductFromResponse } from '../../data/types/product.types.js';
 
 export class ProductStorage {
   private static instance: ProductStorage;
@@ -20,7 +20,7 @@ export class ProductStorage {
     // }
   }
 
-  update(product: Pick<IProductFromResponse, "_id"> & Partial<IProductFromResponse>) {
+  update(product: Pick<IProductFromResponse, '_id'> & Partial<IProductFromResponse>) {
     const index = this.findProductById(product._id);
     this.products[index] = { ...this.products[index], ...product };
   }
@@ -30,10 +30,10 @@ export class ProductStorage {
   }
 
   get(_id?: string) {
-    if (!this.products.length) throw new Error("No stored products");
+    if (!this.products.length) throw new Error('No stored products');
     if (!_id) return this.products[this.products.length - 1];
     const index = this.findProductById(_id);
-    if (!index) throw new Error("No such product");
+    if (!index) throw new Error('No such product');
     return this.products[index];
   }
 

@@ -1,19 +1,21 @@
-import { ADMIN_PASSWORD, ADMIN_USERNAME } from "../../config/environment.js";
-import type { IUserCredentials } from "../../data/types/user.types.js";
-import { logStep } from "../../utils/report/decorator.js";
-import { Users } from "../../config/environment.js";
-import { HomePage } from "../pages/home.page.js";
-import { SignInPage } from "../pages/signIn.page.js";
+import { ADMIN_PASSWORD, ADMIN_USERNAME } from '../../config/environment.js';
+import type { IUserCredentials } from '../../data/types/user.types.js';
+import { logStep } from '../../utils/report/decorator.js';
+import { HomePage } from '../pages/home.page.js';
+import { SignInPage } from '../pages/signIn.page.js';
 
 export class SignInService {
-  constructor(private signInPage = new SignInPage(), private homePage = new HomePage()) { }
+  constructor(
+    private signInPage = new SignInPage(),
+    private homePage = new HomePage(),
+  ) {}
 
-  @logStep("Open sales portal")
+  @logStep('Open sales portal')
   async openSalesPortal() {
-    await this.signInPage.openPage("https://anatoly-karpovich.github.io/aqa-course-project");
+    await this.signInPage.openPage('https://anatoly-karpovich.github.io/aqa-course-project');
   }
 
-  @logStep("Login")
+  @logStep('Login')
   async login(credentials: IUserCredentials) {
     await this.signInPage.fillCredentialsInputs(credentials);
     await this.signInPage.clickSubmitButton();
@@ -21,13 +23,13 @@ export class SignInService {
     await this.homePage.waitForOpened();
   }
 
-  @logStep("Login as Admin")
+  @logStep('Login as Admin')
   async loginAsAdmin() {
     await this.login({ username: ADMIN_USERNAME, password: ADMIN_PASSWORD });
   }
 
-  @logStep("Sign Out")
+  @logStep('Sign Out')
   async signOut() {
-    await this.signInPage.deleteCookies(["Authorization"]);
+    await this.signInPage.deleteCookies(['Authorization']);
   }
 }
