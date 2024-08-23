@@ -19,15 +19,12 @@ When(
 );
 
 When(/^I click on "([^"]*)" on "([^"]*)" page$/, async function (element: string, page: string) {
-  // const foundPage = pages[page];
-  // const elementFromPage = foundPage[element];
-  // await foundPage.click(elementFromPage);
   await pages[page].click(pages[page][element]);
 });
 
 Then(
   /^I should( not)? see "([^"]*)" on "([^"]*)" page$/,
-  async function (not: boolean, element: string, page: string) {
+  async function (not: string, element: string, page: string) {
     not
       ? await pages[page].waitForElement(pages[page][element], { reverse: true })
       : await pages[page].waitForElement(pages[page][element]);

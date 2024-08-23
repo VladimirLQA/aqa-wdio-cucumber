@@ -19,7 +19,6 @@ When(
   async function (idx: number) {
     const customers = Customers.getAll();
     await customerList.openDetailsModal(customers[--idx].email);
-    await browser.pause(5000);
   },
 );
 

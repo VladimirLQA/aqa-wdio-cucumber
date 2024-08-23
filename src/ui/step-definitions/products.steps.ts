@@ -17,12 +17,10 @@ When(/^I create product via API$/, async function () {
   const productData = generateNewProduct();
   const productResponse = await productApi.create(productData, token);
   expect(productResponse.status).toBe(STATUS_CODES.CREATED);
-  // this["product"] = productResponse.body.Product;
   Products.add(productResponse.body.Product);
 });
 
 Then(/^I delete product via API$/, async function () {
-  // const product = this["product"];
   const product = Products.get();
   const token = (await browser.getCookies('Authorization'))[0]?.value;
   const response = await productApi.delete(product._id, `Bearer ${token}`);
@@ -30,7 +28,6 @@ Then(/^I delete product via API$/, async function () {
 });
 
 When(/^I open Edit Product page on "Products List" page$/, async function () {
-  // const createdProduct = this["product"];
   const createdProduct = Products.get();
   await productsListUIService.openEditProductPage(createdProduct.name);
 });
@@ -66,7 +63,6 @@ When(
 );
 
 Then(/^I should see updated Product in table on "Products List" page$/, async function () {
-  // const product = this["product"];
   const product = Products.get();
   await productsListUIService.checkProductInTable(product);
 });

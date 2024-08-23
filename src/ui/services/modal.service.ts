@@ -11,14 +11,11 @@ export class ModalService {
     private filtersModal = new FiltersModalPage(),
   ) {}
 
-  async getDetailsModalData() {
-    const data = await this.detailsModal.getDetailsModalData();
-    return data;
-  }
-
   async verifyDetailsModalData(idx: number) {
     const customer = Customers.getAll()[--idx];
-    const actual = await this.getDetailsModalData();
+    console.log('expected', customer);
+    const actual = await this.detailsModal.getDetailsModalData();
+    console.log('actual', actual);
     const expectedCustomer = _.pick(customer, [
       'name',
       'email',
