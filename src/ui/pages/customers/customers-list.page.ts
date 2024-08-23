@@ -33,6 +33,10 @@ export class CustomersListPage extends SalesPortalPage {
     await this.click(this['Edit button by table row'](customerEmail));
   }
 
+  async clickOnDetailsCustomerButton(customerEmail: string) {
+    await this.click(this['Details button by table row'](customerEmail));
+  }
+
   async getDataByEmail(email: string) {
     const [country, name] = await Promise.all([
       this.getText(this['Country by table row'](email)),

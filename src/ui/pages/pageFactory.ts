@@ -1,6 +1,7 @@
 import { AddNewCustomerPage } from './customers/addNewCustomer.page.js';
 import { CustomersListPage } from './customers/customers-list.page.js';
 import { HomePage } from './home.page.js';
+import { DetailsModalPage } from './modals/detail.modal.page.js';
 import { AddNewProductPage } from './products/addNewProduct.page.js';
 import { EditProductPage } from './products/editProduct.page.js';
 import { ProductsPage } from './products/products.page.js';
@@ -14,6 +15,7 @@ const pages = {
   'Edit Product': new EditProductPage(),
   'Customers List': new CustomersListPage(),
   'Add New Customer': new AddNewCustomerPage(),
+  'Details modal': new DetailsModalPage(),
 };
 
 export default pages;

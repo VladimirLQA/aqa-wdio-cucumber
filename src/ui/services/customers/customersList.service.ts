@@ -9,6 +9,10 @@ export class CustomerService {
     await this.customerListPage.clickOnEditCustomerButton(email);
   }
 
+  async openDetailsModal(email: string) {
+    await this.customerListPage.clickOnDetailsCustomerButton(email);
+  }
+
   async getExistingCustomerData(email: string) {
     const createdCustomertData = await this.customerListPage.getDataByEmail(email);
     return createdCustomertData;

@@ -39,13 +39,11 @@ export class DetailsModalPage extends BaseModalPage {
     await this.click(this['Edit modal button']('Product'));
   }
 
-  async getDetailData() {
+  async getDetailsModalData() {
     const rawData = await this.waitForElementArray(this['Row values']);
-    const [email, name, country, city, street, house, flat, phone, notes] = await asyncMap(
+    const [email, name, country, city, street, house, flat, phone, _, notes] = await asyncMap(
       [...rawData],
-      async (row) => {
-        await $(row).getText();
-      },
+      async (row) => await $(row).getText(),
     );
 
     return {
@@ -54,8 +52,8 @@ export class DetailsModalPage extends BaseModalPage {
       country,
       city,
       street,
-      house,
-      flat,
+      house: +house,
+      flat: +flat,
       phone,
       notes,
     };

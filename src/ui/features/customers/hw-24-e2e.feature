@@ -30,4 +30,9 @@ Feature: [UI] [Customers]
         And I open Customers List page on "Home" page
         Then I should be on "Customers List" page
         Then I should see created Customers in table on "Customers List" page
-# When I open Details modal on "Customers List" page for "1" created customer
+        When I open Details modal on "Customers List" page for "1" created customer
+        Then I should see "1" created customer data in "Details" modal
+        When I click on "Close modal button" on "Details modal" page
+        When I open Details modal on "Customers List" page for "2" created customer
+        Then I should see "2" created customer data in "Details" modal
+        When I click on "Close modal button" on "Details modal" page

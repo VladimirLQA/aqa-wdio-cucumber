@@ -1,11 +1,11 @@
 import { When, Then, After } from '@wdio/cucumber-framework';
 import { CustomersApiService } from '../../api/services/customers/customers.api.service.js';
-import { DetailsModalPage } from '../pages/modals/detail.modal.page.js';
 import { Customers } from '../../config/environment.js';
 import { CustomerService } from '../services/customers/customersList.service.js';
+import { ModalService } from '../services/modal.service.js';
 
 const apiService = new CustomersApiService();
-const detailsModal = new DetailsModalPage();
+const modalService = new ModalService();
 const customerList = new CustomerService();
 
 When(/^I create "([^"]*)"? customers via API$/, async function (amount: number) {
@@ -18,7 +18,8 @@ When(
   /^I open Details modal on "Customers List" page for "([^"]*)" created customer/,
   async function (idx: number) {
     const customers = Customers.getAll();
-    await customerList.openEditModal(customers[--idx].email);
+    await customerList.openDetailsModal(customers[--idx].email);
+    await browser.pause(5000);
   },
 );
 
@@ -27,6 +28,13 @@ Then(/^I should see created Customers in table on "Customers List" page$/, async
     await customerList.checkCustomerInTable(c);
   }
 });
+
+Then(
+  /^I should see "([^"]*)" created customer data in "Details" modal$/,
+  async function (idx: number) {
+    await modalService.verifyDetailsModalData(idx);
+  },
+);
 
 After(async function () {
   await apiService.deleteCreatedCustomers();
