@@ -6,6 +6,7 @@ import { AddNewProductPage } from './products/addNewProduct.page.js';
 import { EditProductPage } from './products/editProduct.page.js';
 import { ProductsPage } from './products/products.page.js';
 import { SignInPage } from './signIn.page.js';
+import { ToastPage } from './toast.page.js';
 
 const pages = {
   'Sign In': new SignInPage(),
@@ -16,6 +17,7 @@ const pages = {
   'Customers List': new CustomersListPage(),
   'Add New Customer': new AddNewCustomerPage(),
   'Details modal': new DetailsModalPage(),
+  Toast: new ToastPage(),
 };
 
 export default pages;

@@ -1,5 +1,10 @@
-import { Given, Then, When } from '@wdio/cucumber-framework';
+import { After, Given, Then, When } from '@wdio/cucumber-framework';
 import pages from '../pages/pageFactory.js';
+import { ToastService } from '../services/toast.service.js';
+import { CustomersApiService } from '../../api/services/customers/customers.api.service.js';
+
+const apiService = new CustomersApiService();
+const toastService = new ToastService();
 
 Given('I open {string} url', async function (url: string) {
   await browser.maximizeWindow();
@@ -15,6 +20,13 @@ When(
   /^I enter "([^"]*)" in "([^"]*)" on "([^"]*)" page$/,
   async function (text: string, element: string, page: string) {
     await pages[page].setValue(pages[page][element], text);
+  },
+);
+
+When(
+  /^I select "([^"]*)" in "([^"]*)" on "([^"]*)" page$/,
+  async function (text: string, element: string, page: string) {
+    await pages[page].selectDropdownValue(pages[page][element], text);
   },
 );
 
@@ -38,6 +50,11 @@ Then(
     method === 'with' ? expect(actualText).toEqual(text) : expect(actualText).toContain(text);
   },
 );
+
+Then(/^I should see notification with text "(.*)"$/, async function (text: string) {
+  const notifications = await toastService.getToastTextAndClose();
+  await toastService.verifyToastMessage(notifications, text);
+});
 
 Then(/^I should be on "([^"]*)" page$/, async function (page: string) {
   await pages[page].waitForSpinnerToHide();

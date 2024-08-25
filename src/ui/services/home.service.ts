@@ -2,13 +2,16 @@ import { logStep } from '../../utils/report/decorator.js';
 import { CustomersListPage } from '../pages/customers/customers-list.page.js';
 import { HomePage } from '../pages/home.page.js';
 import { ProductsPage } from '../pages/products/products.page.js';
+import { SalesPortalService } from './salesPortal.service.js';
 
-export class HomeService {
+export class HomeService extends SalesPortalService {
   constructor(
     private homePage = new HomePage(),
     private productsPage = new ProductsPage(),
     private customersPage = new CustomersListPage(),
-  ) {}
+  ) {
+    super();
+  }
 
   @logStep('Open products page')
   async openProductsPage() {

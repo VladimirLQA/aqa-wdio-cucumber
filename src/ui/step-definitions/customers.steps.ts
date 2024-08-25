@@ -12,8 +12,6 @@ When(/^I create "([^"]*)"? customers via API$/, async function (amount: number) 
   await apiService.populateCustomers(amount);
 });
 
-Then(/I should open "([^"]*)" modal window$/, async function () {});
-
 When(
   /^I open Details modal on "Customers List" page for "([^"]*)" created customer/,
   async function (idx: number) {
@@ -34,6 +32,10 @@ Then(
     await modalService.verifyDetailsModalData(idx);
   },
 );
+
+Then(/^I should delete customer with email "(.*)" via API$/, async function (email: string) {
+  await apiService.deleteCreatedCustomer(email);
+});
 
 After(async function () {
   await apiService.deleteCreatedCustomers();

@@ -3,12 +3,15 @@ import type { IUserCredentials } from '../../data/types/user.types.js';
 import { logStep } from '../../utils/report/decorator.js';
 import { HomePage } from '../pages/home.page.js';
 import { SignInPage } from '../pages/signIn.page.js';
+import { SalesPortalService } from './salesPortal.service.js';
 
-export class SignInService {
+export class SignInService extends SalesPortalService {
   constructor(
     private signInPage = new SignInPage(),
     private homePage = new HomePage(),
-  ) {}
+  ) {
+    super();
+  }
 
   @logStep('Open sales portal')
   async openSalesPortal() {

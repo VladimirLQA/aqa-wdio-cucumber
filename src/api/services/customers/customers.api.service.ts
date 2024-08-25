@@ -31,4 +31,18 @@ export class CustomersApiService {
       expect(response.status).toBe(STATUS_CODES.DELETED);
     }
   }
+
+  @logStep('Create {amount} customers')
+  async deleteCreatedCustomer(email: string) {
+    const token = await signInApiService.signInAsAdminApi();
+
+    const customers = await this.client.getAll(token);
+    const customerToDelete = customers.body.Customers.find((c) => c.email === email);
+    if (customerToDelete) {
+      const response = await this.client.delete(customerToDelete._id, token);
+      expect(response.status).toBe(STATUS_CODES.DELETED);
+    } else {
+      throw new Error(`Customer with email: '${email}' was not found`);
+    }
+  }
 }

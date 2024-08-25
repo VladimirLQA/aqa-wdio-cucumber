@@ -1,11 +1,10 @@
+// import { HomePage } from '../pages/home.page';
 import { ToastPage } from '../pages/toast.page.js';
 
-export class ToastService {
+export class SalesPortalService {
   constructor(private toastPage = new ToastPage()) {}
-
-  async verifyToastMessage(toasts: string[], expected: string) {
-    const isDisplayed = toasts.some((t) => t === expected);
-    expect(isDisplayed).toBe(true);
+  async verifyToastMessage(actual: string, expected: string) {
+    expect(actual).toBe(expected);
   }
 
   async getToastTextAndClose() {

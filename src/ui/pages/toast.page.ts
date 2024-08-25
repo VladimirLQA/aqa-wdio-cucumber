@@ -1,4 +1,5 @@
-import { SalesPortalPage } from './salesPortal.page';
+import { asyncMap } from '../../utils/async-array-methods.js';
+import { SalesPortalPage } from './salesPortal.page.js';
 
 export class ToastPage extends SalesPortalPage {
   readonly uniqueElement: string = '';
@@ -6,11 +7,13 @@ export class ToastPage extends SalesPortalPage {
   readonly 'Close toast button' = 'button[aria-label="Close"]';
 
   async getToasText() {
-    const text = await this.getText(this['Toast body']);
-    return text;
+    await this.waitForElement(this['Toast body']);
+    const notifications = await this.waitForElementArray(this['Toast body']);
+    const texts = asyncMap([...notifications], async (n) => await n.getText());
+    return texts;
   }
 
-  async clickOnCloseToastButton() {
+  async clickOnToastCloseButton() {
     await this.click(this['Close toast button']);
   }
 }

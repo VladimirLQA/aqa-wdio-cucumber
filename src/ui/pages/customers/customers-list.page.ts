@@ -3,7 +3,7 @@ import { SalesPortalPage } from '../salesPortal.page.js';
 export class CustomersListPage extends SalesPortalPage {
   readonly uniqueElement = '//h2[.="Customers List "]';
 
-  readonly 'Add New customer button' = `button.page-title-button`;
+  readonly 'Add New Customer button' = `button.page-title-button`;
 
   readonly 'Table row selector' = (customer: string) => `//tr[./td[text()="${customer}"]]`;
 

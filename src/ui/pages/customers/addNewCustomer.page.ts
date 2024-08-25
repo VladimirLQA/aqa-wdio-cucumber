@@ -8,7 +8,7 @@ export class AddNewCustomerPage extends SalesPortalPage {
 
   readonly 'Name input' = `input#inputName`;
 
-  readonly 'Country dropdown' = `input#inputCountry`;
+  readonly 'Country dropdown' = `select#inputCountry`;
 
   readonly 'City input' = `input#inputCity`;
 
@@ -20,7 +20,7 @@ export class AddNewCustomerPage extends SalesPortalPage {
 
   readonly 'Phone input' = `input#inputPhone`;
 
-  readonly 'Notes textarea' = `input#inputNotes`;
+  readonly 'Notes textarea' = `textarea#textareaNotes`;
 
   readonly 'Save New Customer button' = `button#save-new-customer`;
 

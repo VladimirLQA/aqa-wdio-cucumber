@@ -7,7 +7,7 @@ Feature: [UI] [Login]
     And I enter "<password>" in "Password input" on "Sign In" page
     And I click on "Login button" on "Sign In" page
     Then I should be on "Sign In" page
-    And I should see "Notification label" contains text "<message>" on "Sign In" page
+    And I should see notification with text "<message>"
 
     Examples:
       | username            | password  | message               |
