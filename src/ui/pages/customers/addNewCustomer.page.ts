@@ -1,32 +1,15 @@
-import { ICustomer } from '../../../data/types/customer.types.js';
-import { SalesPortalPage } from '../salesPortal.page.js';
+import { ICustomer } from '../../../data/types/customers/customer.types.js';
+import { AddEditCustomersPage } from './addEditCustomers.page.js';
 
-export class AddNewCustomerPage extends SalesPortalPage {
-  readonly uniqueElement: string = `//h2[.='Add New Customer ']`;
-
-  readonly 'Email input' = `input#inputEmail`;
-
-  readonly 'Name input' = `input#inputName`;
-
-  readonly 'Country dropdown' = `select#inputCountry`;
-
-  readonly 'City input' = `input#inputCity`;
-
-  readonly 'Street input' = `input#inputStreet`;
-
-  readonly 'House input' = `input#inputHouse`;
-
-  readonly 'Flat input' = `input#inputFlat`;
-
-  readonly 'Phone input' = `input#inputPhone`;
-
-  readonly 'Notes textarea' = `textarea#textareaNotes`;
-
-  readonly 'Save New Customer button' = `button#save-new-customer`;
-
-  readonly 'Back button' = `button#back-to-customers-page`;
-
+class AddNewCustomerPage extends AddEditCustomersPage {
+  readonly ['Save Customer button'] = `button#save-new-customer`;
   readonly 'Clear all inputs button' = `button#clear-inputs`;
+  readonly ['Title'] = `//h2[.="Add New Customer "]`;
+
+  async waitForPageOpened(): Promise<void> {
+    await this.waitForDisplayed(this.Title);
+    await this.waitForDisplayed(this['Save Customer button']);
+  }
 
   async fillInputs(customer: Partial<ICustomer>) {
     customer.name && (await this.setValue(this['Name input'], customer.name));
@@ -48,3 +31,5 @@ export class AddNewCustomerPage extends SalesPortalPage {
     await this.click(this['Clear all inputs button']);
   }
 }
+
+export default new AddNewCustomerPage();

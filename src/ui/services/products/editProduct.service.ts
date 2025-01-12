@@ -1,26 +1,16 @@
-import { generateNewProduct } from '../../../data/products/generateProduct.js';
-import { IProduct } from '../../../data/types/product.types.js';
-import { EditProductPage } from '../../pages/products/editProduct.page.js';
-import { ProductsPage } from '../../pages/products/products.page.js';
+import { logStep } from '../../../utils/report/decorator';
+import editProductPage from '../../pages/products/editProduct.page';
+import { SalesPortalPageService } from '../salesPortal.service';
 
-export class EditProductService {
-  constructor(
-    private productsPage = new ProductsPage(),
-    private editProductPage = new EditProductPage(),
-  ) {}
+class EditProductPageService extends SalesPortalPageService {
+  private editProductPage = editProductPage;
 
-  async fillProductInputs(product: Partial<IProduct>) {
-    await this.editProductPage.fillInputs(product);
-  }
-
-  async save() {
-    await this.editProductPage.clickOnSaveButton();
-  }
-
-  async update(product?: Partial<IProduct>) {
-    await this.fillProductInputs(product ?? generateNewProduct());
-    await this.save();
-    await this.editProductPage.waitForSpinnerToHide();
-    await this.productsPage.waitForOpened();
+  @logStep('Validate Edit Product page title')
+  async checkPageTitle(productName: string) {
+    const actualTitle = await this.editProductPage.getTitleText();
+    const expectedTitle = 'Edit ' + productName;
+    expect(actualTitle).toBe(expectedTitle);
   }
 }
+
+export default new EditProductPageService();

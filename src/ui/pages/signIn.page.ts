@@ -1,23 +1,28 @@
-import { SalesPortalPage } from './salesPortal.page.js';
+import { SALES_PORTAL_URL } from '../../config/environment';
+import { IUserCredentials } from '../../data/types/users/user.types';
+import { SalesPortalPage } from './salesPortal.page';
 
-export interface IUserCredentials {
-  username: string;
-  password: string;
-}
+class SignInPage extends SalesPortalPage {
+  readonly ['Email input'] = '#emailinput';
+  readonly ['Password input'] = '#passwordinput';
+  readonly ['Login button'] = 'button[type="submit"]';
 
-export class SignInPage extends SalesPortalPage {
-  uniqueElement = '//form[.//input[@id="emailinput"]]';
-
-  readonly 'Email input' = '#emailinput';
-  readonly 'Password input' = '#passwordinput';
-  readonly 'Login button' = 'button.btn-primary';
-
-  async fillCredentialsInputs(credentials: IUserCredentials) {
-    await this.setValue(this['Email input'], credentials.username);
-    await this.setValue(this['Password input'], credentials.password);
+  async waitForPageOpened(): Promise<void> {
+    await this.waitForDisplayed(this['Login button']);
   }
 
-  async clickSubmitButton() {
+  async fillCredentials(credentials: IUserCredentials) {
+    await this.setValue(this['Email input'], credentials.username);
+    await this.setValue(this['Password input'], credentials.password, { isSecretValue: true });
+  }
+
+  async clickOnLoginButton() {
     await this.click(this['Login button']);
   }
+
+  async open() {
+    await this.openPage(SALES_PORTAL_URL);
+  }
 }
+
+export default new SignInPage();

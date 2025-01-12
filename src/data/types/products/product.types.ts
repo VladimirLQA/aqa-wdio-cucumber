@@ -31,3 +31,10 @@ export enum MANUFACTURERS {
   AMAZON = 'Amazon',
   TESLA = 'Tesla',
 }
+
+export type AddProductFields =
+  | 'Name input'
+  | 'Manufacturer dropdown'
+  | 'Price input'
+  | 'Amount input'
+  | 'Notes textarea';

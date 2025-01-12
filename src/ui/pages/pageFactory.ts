@@ -1,23 +1,14 @@
-import { AddNewCustomerPage } from './customers/addNewCustomer.page.js';
-import { CustomersListPage } from './customers/customers-list.page.js';
-import { HomePage } from './home.page.js';
-import { DetailsModalPage } from './modals/detail.modal.page.js';
-import { AddNewProductPage } from './products/addNewProduct.page.js';
-import { EditProductPage } from './products/editProduct.page.js';
-import { ProductsPage } from './products/products.page.js';
-import { SignInPage } from './signIn.page.js';
-import { ToastPage } from './toast.page.js';
+import signInPage from './signIn.page';
+import homePage from './home.page';
+import productsListPage from './products/products.page';
+import addNewProductPage from './products/addNewProduct.page';
+import editProductPage from './products/editProduct.page';
 
-const pages = {
-  'Sign In': new SignInPage(),
-  Home: new HomePage(),
-  'Products List': new ProductsPage(),
-  'Add New Product': new AddNewProductPage(),
-  'Edit Product': new EditProductPage(),
-  'Customers List': new CustomersListPage(),
-  'Add New Customer': new AddNewCustomerPage(),
-  'Details modal': new DetailsModalPage(),
-  Toast: new ToastPage(),
+export default {
+  'Sign In': signInPage,
+  Home: homePage,
+  Products: productsListPage,
+  'Add New Product': addNewProductPage,
+  'Edit Product': editProductPage,
 };
 
-export default pages;

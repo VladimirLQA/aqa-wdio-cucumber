@@ -1,40 +1,43 @@
 import _ from 'lodash';
-import type { IProduct } from '../../../data/types/product.types.js';
-import { AddNewProductPage } from '../../pages/products/addNewProduct.page.js';
-import { ProductsPage } from '../../pages/products/products.page.js';
-import { logStep } from '../../../utils/report/decorator.js';
-import { EditProductPage } from '../../pages/products/editProduct.page.js';
+import { IProduct } from '../../../data/types/products/product.types';
+import { logStep } from '../../../utils/report/decorator';
+import addNewProductPage from '../../pages/products/addNewProduct.page';
+import editProductPage from '../../pages/products/editProduct.page';
+import productsPage from '../../pages/products/products.page';
+import { SalesPortalPageService } from '../salesPortal.service';
 
-export class ProductsListService {
-  constructor(
-    private productsPage = new ProductsPage(),
-    private addNewProductPage = new AddNewProductPage(),
-    private editProductPage = new EditProductPage(),
-  ) {}
+class ProductsPageService extends SalesPortalPageService {
+  private productsPage = productsPage;
+  private addNewProductPage = addNewProductPage;
+  private editProductPage = editProductPage;
 
-  @logStep('Open Add New Product page')
+  @logStep('Open Add New Product Page')
   async openAddNewProductPage() {
     await this.productsPage.clickOnAddNewProduct();
-    await this.productsPage.waitForSpinnerToHide();
-    await this.addNewProductPage.waitForOpened();
+    await this.addNewProductPage.waitForPageOpened();
   }
 
-  @logStep('Open Edit Product page')
+  @logStep('Open Edit Product Page')
   async openEditProductPage(productName: string) {
-    await this.productsPage.clickOnEditProduct(productName);
-    await this.productsPage.waitForSpinnerToHide();
-    await this.editProductPage.waitForOpened();
+    await this.productsPage.clickOnEditProductButton(productName);
+    await this.editProductPage.waitForPageOpened();
   }
 
-  async getExistingProductData(productName: string) {
-    const createdProductData = await this.productsPage.getDataByName(productName);
-    return createdProductData;
-  }
-
-  @logStep('Validate product in table')
+  @logStep('Check Product In Table')
   async checkProductInTable(product: IProduct) {
-    const actualProduct = await this.getExistingProductData(product.name);
-    const expectedProduct = _.pick(product, ['name', 'price', 'manufacturer']);
-    expect(actualProduct).toMatchObject(expectedProduct);
+    const actualProductData = await this.productsPage.getProductFromTable(product.name);
+    const expectedProductData = _.pick(product, ['name', 'price', 'manufacturer']);
+    expect(actualProductData).toEqual(expectedProductData);
+  }
+
+  @logStep('Delete Product via UI')
+  async deleteProduct(productName: string) {
+    await this.productsPage.clickOnDeleteProductButton(productName);
+    await this.productsPage['Delete Modal'].waitForPageOpened();
+    await this.productsPage['Delete Modal'].clickOnDeleteButton();
+    await this.productsPage['Delete Modal'].waitForDisappeared();
+    await this.productsPage.waitForPageOpened();
   }
 }
+
+export default new ProductsPageService();

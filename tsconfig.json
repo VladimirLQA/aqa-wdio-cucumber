@@ -30,7 +30,7 @@
   "include": [
     "src",
     "wdio.conf.ts"
-  ],
+, "src/ui/pages/actions.page.ts"  ],
   "exclude": [
     "node_modules",
     "allure-results",

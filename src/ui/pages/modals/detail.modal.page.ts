@@ -1,19 +1,16 @@
 import { asyncMap } from '../../../utils/async-array-methods.js';
 import { BaseModalPage } from './base.modal.page.js';
 
-export class DetailsModalPage extends BaseModalPage {
-  readonly uniqueElement: string = '//h5[contains(text(), "Details")]';
-
+class DetailsModalPage extends BaseModalPage {
+  async waitForPageOpened(): Promise<void> {
+    await this.waitForDisplayed(this['Modal container']);
+  }
   readonly 'Edit modal button' = (module: 'Customer' | 'Product') => `//button[.="Edit ${module}"]`;
-
   readonly 'Row values' = `//div[@class="modal-body"]//div[strong]/div`;
-
   readonly 'Row value by row name' = (row: string) =>
     `//div[@class="modal-body"]//div[strong[.="${row}:"]]/div`;
-
   readonly 'Email row value' = (row: string) =>
     `//div[@class="modal-body"]//div[strong[.="${row}:"]]/div`;
-
   readonly 'Name row value' = (row: string) =>
     `//div[@class="modal-body"]//div[strong[.="${row}:"]]/div`;
   readonly 'Country row value' = (row: string) =>
@@ -40,7 +37,7 @@ export class DetailsModalPage extends BaseModalPage {
   }
 
   async getDetailsModalData() {
-    const rawData = await this.waitForElementArray(this['Row values']);
+    const rawData = await this.findArrayOfElements(this['Row values']);
     const [email, name, country, city, street, house, flat, phone, _, notes] = await asyncMap(
       [...rawData],
       async (row) => await $(row).getText(),
@@ -59,3 +56,5 @@ export class DetailsModalPage extends BaseModalPage {
     };
   }
 }
+
+export default new DetailsModalPage();

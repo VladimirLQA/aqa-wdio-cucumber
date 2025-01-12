@@ -1,37 +1,50 @@
 import { SalesPortalPage } from '../salesPortal.page.js';
+import deleteModalPage from '../modals/delete.modal.page.js';
 
-export class ProductsPage extends SalesPortalPage {
-  readonly uniqueElement = '//h2[.="Products List "]';
-
-  readonly 'Add New Product button' = 'button.page-title-header';
-
-  readonly 'Table row selector' = (product: string) => `//tr[./td[text()="${product}"]]`;
-
-  readonly 'Name by table row' = (product: string) =>
-    `${this['Table row selector'](product)}/td[1]`;
-
-  readonly 'Price by table row' = (product: string) =>
-    `${this['Table row selector'](product)}/td[2]`;
-
-  readonly 'Manufacturer by table row' = (product: string) =>
-    `${this['Table row selector'](product)}/td[3]`;
-
-  readonly 'Edit buttin by table row' = (product: string) =>
-    `${this['Table row selector'](product)}//button[@title="Edit"]`;
+class ProductsListPage extends SalesPortalPage {
+  readonly ['Delete Modal'] = deleteModalPage;
+  readonly ['Add New Product'] = 'button.page-title-button';
+  readonly Title = '//h2[.="Products List "]';
+  readonly ['Table row'] = (productName: string) => `//tr[./td[.="${productName}"]]`;
+  readonly ['Product Name in table'] = (productName: string) => `${this['Table row'](productName)}/td[1]`;
+  readonly ['Product Price in table'] = (productName: string) => `${this['Table row'](productName)}/td[2]`;
+  readonly ['Product Manufacturer in table'] = (productName: string) => `${this['Table row'](productName)}/td[3]`;
+  readonly ['Product Creation Date in table'] = (productName: string) => `${this['Table row'](productName)}/td[4]`;
+  readonly ['Product Delete button in table'] = (productName: string) =>
+    `${this['Table row'](productName)}//button[@title="Delete"]`;
+  readonly ['Product Edit button in table'] = (productName: string) =>
+    `${this['Table row'](productName)}//button[@title="Edit"]`;
 
   async clickOnAddNewProduct() {
-    await this.click(this['Add New Product button']);
+    await this.click(this['Add New Product']);
   }
 
-  async clickOnEditProduct(productName: string) {
-    await this.click(this['Edit buttin by table row'](productName));
+  async waitForPageOpened(): Promise<void> {
+    await this.waitForDisplayed(this.Title);
+    await this.waitForSpinnersToBeHidden('Products');
   }
 
-  async getDataByName(name: string) {
-    const [price, manufacturer] = await Promise.all([
-      this.getText(this['Price by table row'](name)),
-      this.getText(this['Manufacturer by table row'](name)),
+  async getProductFromTable(productName: string) {
+    const [name, price, manufacturer] = await Promise.all([
+      this.getText(this['Product Name in table'](productName)),
+      this.getText(this['Product Price in table'](productName)),
+      this.getText(this['Product Manufacturer in table'](productName)),
     ]);
-    return { name, price: +price.replace('$', ''), manufacturer };
+
+    return {
+      name,
+      price: +price.replace('$', ''),
+      manufacturer,
+    };
+  }
+
+  async clickOnDeleteProductButton(productName: string) {
+    await this.click(this['Product Delete button in table'](productName));
+  }
+
+  async clickOnEditProductButton(productName: string) {
+    await this.click(this['Product Edit button in table'](productName));
   }
 }
+
+export default new ProductsListPage();

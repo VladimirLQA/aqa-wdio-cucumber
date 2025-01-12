@@ -1,1 +1,1 @@
-export type MenuItemNames = 'Products' | 'Customers' | 'Orders';
+export type TSideBarMenu = 'Products' | 'Customers' | 'Orders' | 'Home';

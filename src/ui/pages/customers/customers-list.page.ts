@@ -1,29 +1,26 @@
 import { SalesPortalPage } from '../salesPortal.page.js';
 
 export class CustomersListPage extends SalesPortalPage {
-  readonly uniqueElement = '//h2[.="Customers List "]';
-
+  readonly Title = '//h2[.="Customers List "]';
   readonly 'Add New Customer button' = `button.page-title-button`;
-
   readonly 'Table row selector' = (customer: string) => `//tr[./td[text()="${customer}"]]`;
-
   readonly 'Name by table row' = (customer: string) =>
     `${this['Table row selector'](customer)}/td[2]`;
-
   readonly 'Email by table row' = (customer: string) =>
     `${this['Table row selector'](customer)}/td[1]`;
-
   readonly 'Country by table row' = (customer: string) =>
     `${this['Table row selector'](customer)}/td[3]`;
-
   readonly 'Edit button by table row' = (customer: string) =>
     `${this['Table row selector'](customer)}//button[@title="Edit"]`;
-
   readonly 'Delete button by table row' = (customer: string) =>
     `${this['Table row selector'](customer)}//button[@title="Delete"]`;
-
   readonly 'Details button by table row' = (customer: string) =>
     `${this['Table row selector'](customer)}//button[@title="Details"]`;
+
+  async waitForPageOpened(): Promise<void> {
+    await this.waitForDisplayed(this.Title);
+    await this.waitForSpinnersToBeHidden('Products');
+  }
 
   async clickOnAddNewCustomerButton() {
     await this.click(this['Add New Customer button']);

@@ -1,34 +1,32 @@
 import { ADMIN_PASSWORD, ADMIN_USERNAME } from '../../config/environment.js';
 import type { IUserCredentials } from '../../data/types/users/user.types.js';
 import { logStep } from '../../utils/report/decorator.js';
-import { HomePage } from '../pages/home.page.js';
-import { SignInPage } from '../pages/signIn.page.js';
 import { SalesPortalService } from './salesPortal.service.js';
+import homePage from '../pages/home.page';
+import signInPage from '../pages/signIn.page';
 
 export class SignInService extends SalesPortalService {
-  constructor(
-    private signInPage = new SignInPage(),
-    private homePage = new HomePage(),
-  ) {
-    super();
-  }
+  private signInPage = signInPage;
+  private homePage = homePage;
 
-  @logStep('Open sales portal')
+  @logStep('Open Sales Portal')
   async openSalesPortal() {
-    await this.signInPage.openPage('https://anatoly-karpovich.github.io/aqa-course-project');
+    await this.signInPage.open();
   }
 
-  @logStep('Login')
+  @logStep('Login to Sales Portal')
   async login(credentials: IUserCredentials) {
-    await this.signInPage.fillCredentialsInputs(credentials);
-    await this.signInPage.clickSubmitButton();
-    await this.signInPage.waitForSpinnerToHide();
-    await this.homePage.waitForOpened();
+    await this.signInPage.fillCredentials(credentials);
+    await this.signInPage.clickOnLoginButton();
+    await this.homePage.waitForPageOpened();
   }
 
-  @logStep('Login as Admin')
+  @logStep('Login as admin')
   async loginAsAdmin() {
-    await this.login({ username: ADMIN_USERNAME, password: ADMIN_PASSWORD });
+    await this.login({
+      username: ADMIN_USERNAME,
+      password: ADMIN_PASSWORD,
+    });
   }
 
   @logStep('Sign Out')

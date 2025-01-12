@@ -1,30 +1,22 @@
-import { generateNewProduct } from '../../../data/products/generateProduct.js';
-import type { IProduct } from '../../../data/types/product.types.js';
-import { logStep } from '../../../utils/report/decorator.js';
-import { AddNewProductPage } from '../../pages/products/addNewProduct.page.js';
-import { ProductsPage } from '../../pages/products/products.page.js';
+import { generateNewProduct } from '../../../data/products/generateProduct';
+import { IProduct } from '../../../data/types/products/product.types';
+import { logStep } from '../../../utils/report/decorator';
+import addNewProductPage from '../../pages/products/addNewProduct.page';
+import productsPage from '../../pages/products/products.page';
+import { SalesPortalPageService } from '../salesPortal.service';
 
-export class AddProductService {
-  constructor(
-    private productsPage = new ProductsPage(),
-    private addNewProductPage = new AddNewProductPage(),
-  ) {}
+class AddNewProductService extends SalesPortalPageService {
+  private addNewProductPage = addNewProductPage;
+  private productsPage = productsPage;
 
-  @logStep('Fill product inputs')
-  async fillProductInputs(product: Partial<IProduct>) {
-    await this.addNewProductPage.fillInputs(product);
-  }
-
-  @logStep('Save new product')
-  async save() {
+  @logStep('Create product via UI')
+  async populate(product?: IProduct) {
+    const productData = generateNewProduct(product);
+    await this.addNewProductPage.fillInputs(productData);
     await this.addNewProductPage.clickOnSaveButton();
-  }
-
-  @logStep('Create product')
-  async create(product?: IProduct) {
-    await this.fillProductInputs(product ?? generateNewProduct());
-    await this.save();
-    await this.addNewProductPage.waitForSpinnerToHide();
-    await this.productsPage.waitForOpened();
+    await this.productsPage.waitForPageOpened();
+    return productData;
   }
 }
+
+export default new AddNewProductService();

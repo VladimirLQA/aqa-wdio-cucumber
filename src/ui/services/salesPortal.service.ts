@@ -1,15 +1,23 @@
-// import { HomePage } from '../pages/home.page';
-import { ToastPage } from '../pages/toast.page.js';
+import { GetTextMethod } from '../../data/types/common.types';
+import { logStep } from '../../utils/report/decorator';
+import basePage from '../pages/base.page';
 
-export class SalesPortalService {
-  constructor(private toastPage = new ToastPage()) {}
-  async verifyToastMessage(actual: string, expected: string) {
-    expect(actual).toBe(expected);
+export abstract class SalesPortalPageService {
+  private basePage = basePage;
+
+  @logStep('Validate Notification')
+  async validateNotification(text: string, method: GetTextMethod = 'with') {
+    const notification = await this.basePage.getNotificationText(text, method);
+    expect(notification).toBe(text);
   }
 
-  async getToastTextAndClose() {
-    const text = await this.toastPage.getToasText();
-    await this.toastPage.clickOnToastCloseButton();
-    return text;
+  @logStep('Log out')
+  async signOut() {
+    await this.basePage.deleteCookies(['Authorization']);
+  }
+
+  async getToken() {
+    const token = await this.basePage.getCookie('Authorization');
+    return token.value;
   }
 }

@@ -1,29 +1,16 @@
 import { logStep } from '../../utils/report/decorator.js';
-import { CustomersListPage } from '../pages/customers/customers-list.page.js';
-import { HomePage } from '../pages/home.page.js';
-import { ProductsPage } from '../pages/products/products.page.js';
 import { SalesPortalService } from './salesPortal.service.js';
+import homePage from '../pages/home.page.js';
+import productsPage from '../pages/products/products.page.js';
 
 export class HomeService extends SalesPortalService {
-  constructor(
-    private homePage = new HomePage(),
-    private productsPage = new ProductsPage(),
-    private customersPage = new CustomersListPage(),
-  ) {
-    super();
-  }
+  private homePage = homePage;
+  private productsPage = productsPage;
 
-  @logStep('Open products page')
+  @logStep('Open Products Page')
   async openProductsPage() {
-    await this.homePage.clickOnViewDetailsButton('Products');
-    await this.homePage.waitForSpinnerToHide();
-    await this.productsPage.waitForOpened();
+    await this.homePage.clickOnMenuButton('Products');
+    await this.productsPage.waitForPageOpened();
   }
 
-  @logStep('Open customers page')
-  async openCustomersPage() {
-    await this.homePage.clickOnViewDetailsButton('Customers');
-    await this.homePage.waitForSpinnerToHide();
-    await this.customersPage.waitForOpened();
-  }
 }
