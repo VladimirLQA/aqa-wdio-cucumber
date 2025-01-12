@@ -1,5 +1,5 @@
 import { TGetObjectValues } from './common.types.js';
-import { IResponseFields } from './response.types.js';
+import { IResponseFields } from './api/response.types.js';
 
 export interface ICustomer {
   email: string;

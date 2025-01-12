@@ -1,7 +1,7 @@
 import Ajv from 'ajv';
 import { expect } from 'chai';
-import { IResponse } from '../../data/types/api.types.js';
-import { IResponseFields } from '../../data/types/response.types.js';
+import { IResponse } from '../../data/types/api/api.types.js';
+import { IResponseFields } from '../../data/types/api/response.types.js';
 
 export function validateSchema<T = object>(response: IResponse<T>, schema: object) {
   const ajv = new Ajv();

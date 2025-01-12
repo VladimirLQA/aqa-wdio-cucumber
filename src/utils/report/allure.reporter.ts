@@ -1,6 +1,6 @@
 import allure from '@wdio/allure-reporter';
 import { Status } from 'allure-js-commons';
-import { IRequestOptions, IResponse } from '../../data/types/api.types.js';
+import { IRequestOptions, IResponse } from '../../data/types/api/api.types.js';
 
 export class AllureReporter {
   private requestOptions: IRequestOptions | null;

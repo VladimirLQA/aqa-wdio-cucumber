@@ -1,11 +1,11 @@
 import { DataTable, Then, When, After } from '@wdio/cucumber-framework';
-import { ProductsApiClient } from '../../api/clients/products.client.js';
-import signInApiService from '../../api/services/signIn/signIn.service.js';
+import { ProductsApiClient } from '../../api/clients/products.controller.js';
+import signInApiService from '../../api/services/signIn/signIn-api.service.js';
 import { generateNewProduct } from '../../data/products/generateProduct.js';
 import { ProductsListService } from '../services/products/products.service.js';
 import { EditProductService } from '../services/products/editProduct.service.js';
 import { IProduct } from '../../data/types/product.types.js';
-import { STATUS_CODES } from '../../data/types/api.types.js';
+import { STATUS_CODES } from '../../data/types/api/api.types.js';
 import { Products } from '../../config/environment.js';
 
 const productApi = new ProductsApiClient();

@@ -1,20 +1,20 @@
 import { Customers } from '../../../config/environment.js';
-import { generateNewCustomer } from '../../../data/customers/generateNewCustomer.js';
-import { STATUS_CODES } from '../../../data/types/api.types.js';
-import { logAction, logStep } from '../../../utils/report/decorator.js';
-import { CustomersApiClient } from '../../clients/customers.client.js';
-import signInApiService from '../../../api/services/signIn/signIn.service.js';
+import { generateNewCustomer } from '../../../data/customers/generateCustomer.js';
+import { STATUS_CODES } from '../../../data/types/api/api.types.js';
+import { logStep } from '../../../utils/report/decorator.js';
+import CustomersController from '../../clients/customers.controller.js';
+import signInApiService from '../signIn/signIn-api.service.js';
 
 export class CustomersApiService {
-  constructor(private client = new CustomersApiClient()) {}
+  constructor(private controller = CustomersController) {}
 
   @logStep('Create {amount} customers')
-  async populateCustomers(amount: number = 1) {
+  async populateCustomers(amount: number = 1 ) {
     const token = await signInApiService.signInAsAdminApi();
 
     for (let i = 1; i <= amount; i++) {
       const cutomerToCreate = generateNewCustomer();
-      const createdCustomer = await this.client.create(cutomerToCreate, token);
+      const createdCustomer = await this.controller.create(cutomerToCreate, token);
 
       expect(createdCustomer.status).toBe(STATUS_CODES.CREATED);
 
@@ -27,7 +27,7 @@ export class CustomersApiService {
     const token = await signInApiService.signInAsAdminApi();
 
     for (const customer of Customers.getAll()) {
-      const response = await this.client.delete(customer._id, token);
+      const response = await this.controller.delete(customer._id, token);
       expect(response.status).toBe(STATUS_CODES.DELETED);
     }
   }
@@ -36,10 +36,10 @@ export class CustomersApiService {
   async deleteCreatedCustomer(email: string) {
     const token = await signInApiService.signInAsAdminApi();
 
-    const customers = await this.client.getAll(token);
+    const customers = await this.controller.getAll(token);
     const customerToDelete = customers.body.Customers.find((c) => c.email === email);
     if (customerToDelete) {
-      const response = await this.client.delete(customerToDelete._id, token);
+      const response = await this.controller.delete(customerToDelete._id, token);
       expect(response.status).toBe(STATUS_CODES.DELETED);
     } else {
       throw new Error(`Customer with email: '${email}' was not found`);

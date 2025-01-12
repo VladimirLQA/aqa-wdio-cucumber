@@ -1,5 +1,5 @@
 import { ADMIN_PASSWORD, ADMIN_USERNAME } from '../../config/environment.js';
-import type { IUserCredentials } from '../../data/types/user.types.js';
+import type { IUserCredentials } from '../../data/types/users/user.types.js';
 import { logStep } from '../../utils/report/decorator.js';
 import { HomePage } from '../pages/home.page.js';
 import { SignInPage } from '../pages/signIn.page.js';

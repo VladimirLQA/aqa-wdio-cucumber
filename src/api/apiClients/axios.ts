@@ -1,6 +1,6 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { IRequestOptions, IResponse } from '../../data/types/api.types.js';
-import { AllureReporter } from '../report/allure.reporter.js';
+import axios, { AxiosRequestConfig, AxiosResponse, isAxiosError } from 'axios';
+import { IRequestOptions, IResponse } from '../../data/types/api/api.types.js';
+import { AllureReporter } from '../../utils/report/allure.reporter.js';
 
 export class AxiosApiClient {
   private response: AxiosResponse | undefined;
@@ -13,8 +13,10 @@ export class AxiosApiClient {
       return this.transformResponse();
     } catch (err: unknown) {
       if (!isAxiosError(err)) throw err;
+
       console.log('Error', err.message);
       console.log('Request URL:', options.method, options.url);
+
       this.response = err.response;
       return this.transformResponse();
     } finally {
@@ -29,8 +31,4 @@ export class AxiosApiClient {
       headers: this.response!.headers,
     };
   }
-}
-
-function isAxiosError(err: unknown): err is AxiosError {
-  return err instanceof AxiosError;
 }

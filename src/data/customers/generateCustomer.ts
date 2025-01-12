@@ -1,5 +1,5 @@
 import { getRandromEnumValue } from '../../utils/enums/getRandomValue.js';
-import { COUNTRY, type ICustomer } from '../types/customer.types.js';
+import { COUNTRY, type ICustomer } from '../types/customers/customer.types.js';
 import { faker } from '@faker-js/faker';
 
 export const generateNewCustomer = (customerData?: Partial<ICustomer>) => {

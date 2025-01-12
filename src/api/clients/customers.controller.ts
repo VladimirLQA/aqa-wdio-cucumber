@@ -1,14 +1,14 @@
 import { apiConfig } from '../../config/apiConfig.js';
-import { IRequestOptions } from '../../data/types/api.types.js';
+import { IRequestOptions } from '../../data/types/api/api.types.js';
 import {
   ICustomer,
   ICustomerResponse,
   ICustomersResponse,
-} from '../../data/types/customer.types.js';
-import { AxiosApiClient } from '../../utils/apiClients/axios.js';
+} from '../../data/types/customers/customer.types.js';
+import { AxiosApiClient } from '../apiClients/axios.js';
 import { logStep } from '../../utils/report/decorator.js';
 
-export class CustomersApiClient {
+class CustomersController {
   constructor(private apiClient = new AxiosApiClient()) {}
 
   @logStep('Create customer via API')
@@ -71,3 +71,5 @@ export class CustomersApiClient {
     return this.apiClient.send<null>(options);
   }
 }
+
+export default new CustomersController();
