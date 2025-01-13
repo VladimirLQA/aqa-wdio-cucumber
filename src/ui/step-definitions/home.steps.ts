@@ -7,7 +7,7 @@ Then(/^I should be on "Home" page$/, async function () {
 });
 
 When(
-  /^I open (Products|Customers|Orders) List page on "Home" page$/,
+  /^I open "(Products|Customers|Orders)" page$/,
   async function (module: string) {
     if (module === 'Products') await homeService.openProductsPage();
     if (module === 'Customers') await homeService.openCustomersPage();

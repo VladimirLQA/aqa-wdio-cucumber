@@ -5,6 +5,7 @@ import addNewProductPage from '../../pages/products/addNewProduct.page';
 import editProductPage from '../../pages/products/editProduct.page';
 import productsListPage from '../../pages/products/products.page';
 import { SalesPortalPageService } from '../salesPortal.service';
+import { generateNewProduct } from '../../../data/products/generateProduct';
 
 class ProductsPageService extends SalesPortalPageService {
   private productsPage = productsListPage;
@@ -16,6 +17,15 @@ class ProductsPageService extends SalesPortalPageService {
     await this.productsPage.clickOnAddNewProduct();
     await this.addNewProductPage.waitForPageOpened();
   }
+
+  // @logStep('Create product')
+  // async createProduct(productData?: Partial<IProduct>) {
+  //   const product = generateNewProduct(productData);
+  //   await this.addNewProductPage.fillInputs(product);
+  //   await this.addNewProductPage.clickOnSaveButton();
+  //   await this.productsPage.waitForPageOpened();
+  //   return product;
+  // }
 
   @logStep('Open Edit Product Page')
   async openEditProductPage(productName: string) {

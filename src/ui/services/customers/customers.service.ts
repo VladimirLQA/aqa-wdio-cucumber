@@ -1,9 +1,13 @@
-import { ICustomer } from '../../../data/types/customers/customer.types.js';
-import customersListPage from '../../pages/customers/customers-list.page.js';
+import { ICustomer } from '../../../data/types/customers/customer.types';
+import customersListPage from '../../pages/customers/customers-list.page';
 import _ from 'lodash';
+import editCustomerPage from '../../pages/customers/editCustomer.page';
+import addCustomerPage from '../../pages/customers/addNewCustomer.page';
 
 class CustomerPageService {
   private customersPage = customersListPage;
+  private editCustomerPage = editCustomerPage;
+  private addCustomerPage = addCustomerPage;
 
   async openEditModal(email: string) {
     await this.customersPage.clickOnEditCustomerButton(email);
