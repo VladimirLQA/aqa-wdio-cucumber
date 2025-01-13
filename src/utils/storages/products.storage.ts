@@ -1,4 +1,4 @@
-import type { IProductFromResponse } from '../../data/types/product.types.js';
+import type { IProductFromResponse } from '../../data/types/products/product.types';
 
 export class ProductStorage {
   private static instance: ProductStorage;
@@ -37,9 +37,21 @@ export class ProductStorage {
     return this.products[index];
   }
 
+  getWithName(name?: string) {
+    if (!this.products.length) throw new Error('No stored products');
+    if (!name) return this.products[this.products.length - 1];
+    const index = this.findProductByName(name);
+    if (!index) throw new Error('No such product');
+    return this.products[index];
+  }
+
   remove(_id: string) {
     const index = this.findProductById(_id);
     this.products.splice(index, 1);
+  }
+
+  private findProductByName(name: string) {
+    return this.products.findIndex((p) => p.name === name);
   }
 
   private findProductById(_id: string) {
