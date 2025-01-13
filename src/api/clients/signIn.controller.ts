@@ -4,7 +4,7 @@ import type { ILoginResponse, IUserCredentials } from '../../data/types/users/us
 import { AxiosApiClient } from '../apiClients/axios.js';
 import { logStep } from '../../utils/report/decorator.js';
 
-export class SignInController {
+class SignInController {
   constructor(private apiClient = new AxiosApiClient()) {}
 
   @logStep('Sign in via API')

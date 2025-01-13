@@ -5,7 +5,7 @@ import { logStep } from '../../../utils/report/decorator.js';
 import CustomersController from '../../clients/customers.controller.js';
 import signInApiService from '../signIn/signIn-api.service.js';
 
-export class CustomersApiService {
+class CustomersApiService {
   constructor(private controller = CustomersController) {}
 
   @logStep('Create {amount} customers')
@@ -46,3 +46,5 @@ export class CustomersApiService {
     }
   }
 }
+
+export default new CustomersApiService();

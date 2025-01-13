@@ -1,5 +1,3 @@
-import { IProduct } from '../../../data/types/product.types.js';
-import { SalesPortalPage } from '../salesPortal.page.js';
 import { AddEditProductPage } from './addEditProduct.page.js';
 
 class EditProductPage extends AddEditProductPage {

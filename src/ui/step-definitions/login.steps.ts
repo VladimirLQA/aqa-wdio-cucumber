@@ -1,12 +1,15 @@
-import { Then } from '@wdio/cucumber-framework';
-import { SignInPage } from '../pages/signIn.page.js';
+import { Given, Then, When } from '@wdio/cucumber-framework';
+import signInPage from '../pages/signIn.page';
+import signInService from '../services/signIn.service';
 
-const signInPage = new SignInPage();
+Given(/^I open Sales Portal$/, async function(){
+  await signInService.openSalesPortal();
+});
 
-// Then(/^I should be on "Sign In" page$/, async function () {
-//   await signInPage.waitForOpened();
-// });
+Then(/^I should be on "Sign In" page$/, async function () {
+  await signInPage.waitForPageOpened();
+});
 
-// When(/^I enter "([^"]*)" in "([^"]*)" on "Sign In" page$/, async function (text: string, element: string) {
-//   await signInPage.setValue(signInPage[element], text);
-// });
+When(/^I log in as Admin$/, async function () {
+  await signInService.loginAsAdmin();
+});

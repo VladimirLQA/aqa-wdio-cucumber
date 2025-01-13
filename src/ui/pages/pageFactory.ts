@@ -3,6 +3,9 @@ import homePage from './home.page';
 import productsListPage from './products/products.page';
 import addNewProductPage from './products/addNewProduct.page';
 import editProductPage from './products/editProduct.page';
+import customersListPage from './customers/customers-list.page';
+import addNewCustomerPage from './customers/addNewCustomer.page';
+import editCustomerPage from './customers/editCustomer.page';
 
 export default {
   'Sign In': signInPage,
@@ -10,5 +13,8 @@ export default {
   Products: productsListPage,
   'Add New Product': addNewProductPage,
   'Edit Product': editProductPage,
+  Customers: customersListPage,
+  'Add New Customer': addNewCustomerPage,
+  'Edit Customer': editCustomerPage,
 };
 

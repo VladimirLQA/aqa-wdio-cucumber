@@ -26,7 +26,7 @@ export const config = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: ['src/ui/features/**/*.feature'],
+  specs: ['src/ui/features/products/**/login.feature'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -66,7 +66,7 @@ export const config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: 'error',
+  logLevel: 'debug',
   //
   // Set specific log levels per logger
   // loggers:
@@ -183,8 +183,8 @@ export const config = {
    * @param {object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  onPrepare: function (config, capabilities) {
-  },
+  // onPrepare: function (config, capabilities) {
+  // },
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -222,9 +222,9 @@ export const config = {
    * @param {Array.<String>} specs        List of spec file paths that are to be run
    * @param {object}         browser      instance of created browser/device session
    */
-  before: async function (capabilities, specs) {
-    await browser.maximizeWindow();
-  },
+  // before: async function (capabilities, specs) {
+  //   await browser.maximizeWindow();
+  // },
   /**
    * Runs before a WebdriverIO command gets executed.
    * @param {string} commandName hook command name

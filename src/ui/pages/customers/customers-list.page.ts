@@ -1,6 +1,6 @@
 import { SalesPortalPage } from '../salesPortal.page.js';
 
-export class CustomersListPage extends SalesPortalPage {
+class CustomersListPage extends SalesPortalPage {
   readonly Title = '//h2[.="Customers List "]';
   readonly 'Add New Customer button' = `button.page-title-button`;
   readonly 'Table row selector' = (customer: string) => `//tr[./td[text()="${customer}"]]`;
@@ -42,3 +42,5 @@ export class CustomersListPage extends SalesPortalPage {
     return { name, country, email };
   }
 }
+
+export default new CustomersListPage();

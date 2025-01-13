@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "moduleResolution": "node",
-    "module": "ES2022",
-    "target": "es2022",
+    "module": "ESNext",
+    "target": "ES2024",
     "esModuleInterop": true,
     "lib": [
       "es2022",
@@ -29,8 +29,9 @@
   },
   "include": [
     "src",
-    "wdio.conf.ts"
-, "src/ui/pages/actions.page.ts"  ],
+    "wdio.conf.ts",
+    "src/ui/pages/actions.page.ts"
+  ],
   "exclude": [
     "node_modules",
     "allure-results",

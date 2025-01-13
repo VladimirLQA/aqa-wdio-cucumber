@@ -1,4 +1,4 @@
-import type { ICustomerFromResponse } from '../../data/types/customer.types.js';
+import type { ICustomerFromResponse } from '../../data/types/customers/customer.types.js';
 
 export class CustomerStorage {
   private static instance: CustomerStorage;

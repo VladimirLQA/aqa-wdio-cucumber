@@ -1,6 +1,6 @@
 import { AddEditCustomersPage } from './addEditCustomers.page.js';
 
-class EditCutomersPage extends AddEditCustomersPage {
+class EditCutomerPage extends AddEditCustomersPage {
   readonly ['Save Customer button'] = `button#save-customer-changes`;
   readonly ['Title'] = `h2.page-title-text`;
 
@@ -14,4 +14,4 @@ class EditCutomersPage extends AddEditCustomersPage {
   }
 }
 
-export default new EditCutomersPage();
+export default new EditCutomerPage();

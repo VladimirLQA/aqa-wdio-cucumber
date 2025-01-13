@@ -3,11 +3,11 @@ import { IProduct } from '../../../data/types/products/product.types';
 import { logStep } from '../../../utils/report/decorator';
 import addNewProductPage from '../../pages/products/addNewProduct.page';
 import editProductPage from '../../pages/products/editProduct.page';
-import productsPage from '../../pages/products/products.page';
+import productsListPage from '../../pages/products/products.page';
 import { SalesPortalPageService } from '../salesPortal.service';
 
 class ProductsPageService extends SalesPortalPageService {
-  private productsPage = productsPage;
+  private productsPage = productsListPage;
   private addNewProductPage = addNewProductPage;
   private editProductPage = editProductPage;
 

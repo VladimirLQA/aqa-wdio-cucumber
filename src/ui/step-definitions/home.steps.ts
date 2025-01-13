@@ -1,7 +1,10 @@
-import { When } from '@wdio/cucumber-framework';
-import { HomeService } from '../services/home.service.js';
+import { Then, When } from '@wdio/cucumber-framework';
+import homeService from '../services/home.service.js';
+import homePage from '../pages/home.page.js';
 
-const homeService = new HomeService();
+Then(/^I should be on "Home" page$/, async function () {
+  await homePage.waitForPageOpened();
+});
 
 When(
   /^I open (Products|Customers|Orders) List page on "Home" page$/,

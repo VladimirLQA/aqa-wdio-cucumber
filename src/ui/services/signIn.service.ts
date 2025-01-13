@@ -1,11 +1,11 @@
-import { ADMIN_PASSWORD, ADMIN_USERNAME } from '../../config/environment.js';
-import type { IUserCredentials } from '../../data/types/users/user.types.js';
-import { logStep } from '../../utils/report/decorator.js';
-import { SalesPortalService } from './salesPortal.service.js';
+import { ADMIN_PASSWORD, ADMIN_USERNAME } from '../../config/environment';
+import type { IUserCredentials } from '../../data/types/users/user.types';
+import { logStep } from '../../utils/report/decorator';
+import { SalesPortalPageService } from './salesPortal.service';
 import homePage from '../pages/home.page';
 import signInPage from '../pages/signIn.page';
 
-export class SignInService extends SalesPortalService {
+class SignInService extends SalesPortalPageService {
   private signInPage = signInPage;
   private homePage = homePage;
 
@@ -34,3 +34,5 @@ export class SignInService extends SalesPortalService {
     await this.signInPage.deleteCookies(['Authorization']);
   }
 }
+
+export default new SignInService();

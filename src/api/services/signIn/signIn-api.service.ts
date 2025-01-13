@@ -1,4 +1,4 @@
-import { SignInController } from '../../clients/signIn.controller.js';
+import signInController from '../../clients/signIn.controller.js';
 import { ADMIN_USERNAME, ADMIN_PASSWORD } from '../../../config/environment.js';
 import { logStep } from '../../../utils/report/decorator.js';
 import { validateResponse } from '../../../utils/validation/response.js';
@@ -7,7 +7,7 @@ import { STATUS_CODES } from '../../../data/types/api/api.types.js';
 class SignInApiService {
   private token: string | null = null;
 
-  constructor(private controller = new SignInController()) { }
+  constructor(private controller = signInController) {}
 
   @logStep('Sign in as Admin via API')
   async signInAsAdminApi() {
