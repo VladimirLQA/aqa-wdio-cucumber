@@ -19,7 +19,7 @@ class CustomersListPage extends SalesPortalPage {
 
   async waitForPageOpened(): Promise<void> {
     await this.waitForDisplayed(this.Title);
-    await this.waitForSpinnersToBeHidden('Products');
+    await this.waitForSpinnersToBeHidden('Customers');
   }
 
   async clickOnAddNewCustomerButton() {

@@ -25,6 +25,7 @@ export abstract class AddEditProductPage extends SalesPortalPage {
   }
 
   async fillInputs(product: Partial<IProduct>) {
+    await browser.pause(500);
     if (product.name) await this.setValue(this['Name input'], product.name);
     if (product.manufacturer) await this.selectDropdownValue(this['Manufacturer dropdown'], product.manufacturer);
     if (product.price) await this.setValue(this['Price input'], product.price);

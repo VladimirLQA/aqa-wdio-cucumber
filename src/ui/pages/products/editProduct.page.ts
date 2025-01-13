@@ -15,7 +15,7 @@ class EditProductPage extends AddEditProductPage {
   }
 
   async clickOnSaveButton() {
-    await this.click(this['Save Changes button']);
+    await this.click(this['Save Product button']);
   }
 
   async clickOnDeleteButton() {

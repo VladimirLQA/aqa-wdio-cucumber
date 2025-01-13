@@ -1,5 +1,5 @@
-import { SalesPortalPage } from '../salesPortal.page.js';
-import deleteModalPage from '../modals/delete.modal.page.js';
+import { SalesPortalPage } from '../salesPortal.page';
+import deleteModalPage from '../modals/delete.modal.page';
 
 class ProductsListPage extends SalesPortalPage {
   readonly ['Delete Modal'] = deleteModalPage;
