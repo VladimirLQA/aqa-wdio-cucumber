@@ -1,6 +1,29 @@
 import * as dotenv from 'dotenv';
+// import parser from '@cucumber/tag-expressions';
+// import fs from 'node:fs';
 
 dotenv.config();
+
+const specGroups: Record<string, string[]> = {
+  ui: ['src/ui/features/**/*.feature'],
+  single: ['src/ui/features/products/**/edit-product.feature'],
+};
+
+const specToRun = specGroups[process.env.SPEC ?? 'ui'] || ['src/ui/features/**/*.feature'];
+
+// TODO experimental
+// const getMatchingFeatureCount = (specs: string[], tagExpression: string): number => {
+//   const expression = parser(tagExpression);
+
+//   return specs.filter((file) => {
+//     const content = fs.readFileSync(file, 'utf8');
+//     const tags = content.match(/@\w+/g) || [];
+//     return expression.evaluate(tags);
+//   }).length;
+// };
+// const countWorkers = getMatchingFeatureCount(['src/ui/features/products/edit-product.feature',
+//   'src/ui/features/products/create-product.feature'
+// ], '@single');
 
 export const config = {
   //
@@ -26,7 +49,7 @@ export const config = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: ['src/ui/features/products/**/login.feature'],
+  specs: specToRun,
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -47,7 +70,7 @@ export const config = {
   // and 30 processes will get spawned. The property handles how many capabilities
   // from the same test should run tests.
   //
-  maxInstances: 10,
+  maxInstances: 6,
   //
   // If you have trouble getting all important capabilities together, check out the
   // Sauce Labs platform configurator - a great tool to configure your capabilities:

@@ -21,6 +21,9 @@
   },
   "scripts": {
     "test": "npm run report-clear && wdio run ./wdio.conf.ts",
+    "test:single": "npm run report-clear && SPEC=single wdio run ./wdio.conf.ts",
+    "test:ui": "npm run report-clear && SPEC=ui wdio run ./wdio.conf.ts",
+    "test:tag": "npm run report-clear && wdio run ./wdio.conf.ts --cucumberOpts.tagExpression='@single'",
     "report": "allure generate allure-results -o allure-report --clean",
     "report-open": "npm run report && allure open allure-report",
     "report-clear": "rm -rf allure-results/* && rm -rf allure-report/*"

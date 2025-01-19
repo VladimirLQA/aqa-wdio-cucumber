@@ -39,7 +39,8 @@ export function logAction(stepName: string): MethodDecorator {
       const newStepName = stepName
         .replace('{selector}', `"${selector}"`)
         .replace('{text}', `"${value}"`)
-        .replace('{amount}', `"${value}"`);
+        .replace('{amount}', `"${value}"`)
+        .replace('{email}', `"${value}"`);
       allure.startStep(newStepName);
       try {
         const result = await originalMethod.apply(this, args);
