@@ -4,6 +4,7 @@ import { STATUS_CODES } from '../../../data/types/api/api.types';
 import { IProductFromResponse, IProduct } from '../../../data/types/products/product.types';
 import { validateResponse, validateSchema } from '../../../utils/validation/response';
 import ProductsController from '../../clients/products.controller';
+import signInApiService from '../signIn/signIn-api.service';
 
 class ProductApiService {
   private createdProducts: IProductFromResponse[] = [];
@@ -45,6 +46,24 @@ class ProductApiService {
       expect(response.status).toBe(STATUS_CODES.DELETED);
     }
     this.createdProducts = [];
+  }
+
+  async deleteProductWithName(name: string, token: string = signInApiService.getToken()) {
+    const storedProduct = this.createdProducts.find((p) => p.name === name);
+    if (storedProduct) {
+      const response = await this.controller.delete(storedProduct?._id, token);
+      expect(response.status).toBe(STATUS_CODES.DELETED);
+      return;
+    }
+
+    const productServer = (await this.controller.getAll(token))
+      .body.Products.find((p) => p.name === name);
+    if (!productServer) {
+      throw Error(`Product with name: "${name}" was not found`);
+    }
+
+    const response = await this.controller.delete(productServer?._id, token);
+    expect(response.status).toBe(STATUS_CODES.DELETED);
   }
 
   private findProductIndex(id: string) {

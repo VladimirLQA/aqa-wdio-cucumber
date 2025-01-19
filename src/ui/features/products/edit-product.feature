@@ -1,4 +1,4 @@
-@smoke @regression @run
+@smoke @regression @cleanup @single
 Feature: [UI] [Products] [Edit]
 
   Scenario: Update product with valid data

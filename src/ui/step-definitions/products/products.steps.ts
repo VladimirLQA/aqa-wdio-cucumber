@@ -34,7 +34,11 @@ When(/^I open "Edit Product" page for created product on "Products" page$/, asyn
   await productsPageService.openEditProductPage(createdProduct.name);
 });
 
-After(async function () {
+Then(/^I delete product with name "([^"]*)" via API$/, async function(name: string) {
+  await productsApiService.deleteProductWithName(name);
+});
+
+After({ tags: '@cleanup' }, async function () {
   if (this.createdProduct) {
     const token = signInApiService.getToken();
     await productsApiService.delete(token, this.createdProduct._id);
